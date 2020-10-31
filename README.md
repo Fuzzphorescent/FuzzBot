@@ -10,7 +10,7 @@
 + Performs the opposite operation when the reaction is removed.
 
 ## Cloning and Execution
-+ Clone the repository: git clone https://github.com/Fuzzphorescent/FuzzBot.git
++ Clone the repository: `git clone https://github.com/Fuzzphorescent/FuzzBot.git`
 + `cd FuzzBot`
 + Create a virtual environment: `virtualenv -p python3 venv`
 + Activate the virtual environment: `source venv/bin/activate`
