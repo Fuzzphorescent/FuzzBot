@@ -1,1 +1,7 @@
 BOT_TOKEN = 'your_bot_token_here'
+MESSAGE_ID = <message_id>
+CHANNEL_ID = <channel_id>
+EMOJI_ID = <emoji_id>
+GUILD_ID = <guild_id>
+ROLE_1 = 'role_1_name'
+ROLE_2 = 'role_2_name'
