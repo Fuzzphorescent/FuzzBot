@@ -20,24 +20,24 @@ def get_role_by_name(guild, role_name):
         if role_name == role.name:
             return role
 
+async def switch_roles_by_reaction(payload, channel_id, message_id, emoji_id, guild_id, \
+                             role_to_add, role_to_remove):
+    if payload.channel_id == int(channel_id) and \
+    payload.message_id == int(message_id) and \
+    payload.emoji.id == int(emoji_id):
+        guild = client.get_guild(int(guild_id))
+        member = guild.get_member(payload.user_id)
+        await member.add_roles(get_role_by_name(guild, role_to_add))
+        await member.remove_roles(get_role_by_name(guild, role_to_remove))
+
 @client.event
 async def on_raw_reaction_add(payload):
-    if payload.channel_id == int(config.CHANNEL_ID) and \
-    payload.message_id == int(config.MESSAGE_ID) and \
-    payload.emoji.id == int(config.EMOJI_ID):
-        guild = client.get_guild(int(config.GUILD_ID))
-        member = guild.get_member(payload.user_id)
-        await member.add_roles(get_role_by_name(guild, config.ROLE_1))
-        await member.remove_roles(get_role_by_name(guild, config.ROLE_2))
+    await switch_roles_by_reaction(payload, config.CHANNEL_ID, config.MESSAGE_ID, config.EMOJI_ID, \
+                             config.GUILD_ID, config.ROLE_1, config.ROLE_2)
 
 @client.event
 async def on_raw_reaction_remove(payload):
-    if payload.channel_id == int(config.CHANNEL_ID) and \
-    payload.message_id == int(config.MESSAGE_ID) and \
-    payload.emoji.id == int(config.EMOJI_ID):
-        guild = client.get_guild(int(config.GUILD_ID))
-        member = guild.get_member(payload.user_id)
-        await member.add_roles(get_role_by_name(guild, config.ROLE_2))
-        await member.remove_roles(get_role_by_name(guild, config.ROLE_1))
+    await switch_roles_by_reaction(payload, config.CHANNEL_ID, config.MESSAGE_ID, config.EMOJI_ID, \
+                             config.GUILD_ID, config.ROLE_2, config.ROLE_1)
 
 client.run(config.BOT_TOKEN)
